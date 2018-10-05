@@ -1,12 +1,14 @@
 <?php
 
 use Interop\Container\ContainerInterface;
-use MeetupOrganizing\Command\ScheduleMeetupConsoleHandler;
-use MeetupOrganizing\Controller\MeetupDetailsController;
-use MeetupOrganizing\Entity\MeetupRepository;
-use MeetupOrganizing\Controller\ListMeetupsController;
-use MeetupOrganizing\Controller\ScheduleMeetupController;
-use MeetupOrganizing\Resources\Views\TwigTemplates;
+use MeetupOrganizing\Application\ScheduleMeetupHandler;
+use MeetupOrganizing\Infrastructure\Persistence\FileSystem\FileBasedMeetupRepository;
+use MeetupOrganizing\Infrastructure\UserInterface\Cli\ScheduleMeetupConsoleHandler;
+use MeetupOrganizing\Infrastructure\UserInterface\Web\MeetupDetailsController;
+use MeetupOrganizing\Domain\Model\MeetupRepository;
+use MeetupOrganizing\Infrastructure\UserInterface\Web\ListMeetupsController;
+use MeetupOrganizing\Infrastructure\UserInterface\Web\ScheduleMeetupController;
+use MeetupOrganizing\Infrastructure\UserInterface\Web\Resources\Views\TwigTemplates;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Debug\Debug;
@@ -90,7 +92,7 @@ $container[UrlHelper::class] = function (ContainerInterface $container) {
  * Persistence
  */
 $container[MeetupRepository::class] = function () {
-    return new MeetupRepository(__DIR__ . '/../var/meetups.txt');
+    return new FileBasedMeetupRepository(__DIR__ . '/../var/meetups.txt');
 };
 
 /*
@@ -100,7 +102,7 @@ $container[ScheduleMeetupController::class] = function (ContainerInterface $cont
     return new ScheduleMeetupController(
         $container->get(TemplateRendererInterface::class),
         $container->get(RouterInterface::class),
-        $container->get(MeetupRepository::class)
+        $container->get(ScheduleMeetupHandler::class)
     );
 };
 $container[ListMeetupsController::class] = function (ContainerInterface $container) {
@@ -121,8 +123,15 @@ $container[MeetupDetailsController::class] = function (ContainerInterface $conta
  */
 $container[ScheduleMeetupConsoleHandler::class] = function (ContainerInterface $container) {
     return new ScheduleMeetupConsoleHandler(
-        $container->get(MeetupRepository::class)
+        $container->get(ScheduleMeetupHandler::class)
     );
+};
+
+/*
+ * Application services
+ */
+$container[ScheduleMeetupHandler::class] = function (ContainerInterface $container) {
+    return new ScheduleMeetupHandler($container->get(MeetupRepository::class));
 };
 
 return $container;
