@@ -4,8 +4,13 @@ declare(strict_types=1);
 namespace MeetupOrganizing\Infrastructure\Persistence\FileSystem;
 
 use MeetupOrganizing\Domain\Model\Meetup;
+<<<<<<< HEAD:src/MeetupOrganizing/Infrastructure/Persistence/FileSystem/FileBasedMeetupRepository.php
+=======
+use MeetupOrganizing\Domain\Model\MeetupId;
+>>>>>>> 937cee3c946cdb6624d55b0da7d0f8776c6df241:src/MeetupOrganizing/Infrastructure/Persistence/FileSystem/FileBasedMeetupRepository.php
 use MeetupOrganizing\Domain\Model\MeetupRepository;
 use NaiveSerializer\Serializer;
+use Ramsey\Uuid\Uuid;
 
 final class FileBasedMeetupRepository implements MeetupRepository
 {
@@ -22,16 +27,14 @@ final class FileBasedMeetupRepository implements MeetupRepository
     public function add(Meetup $meetup): void
     {
         $meetups = $this->persistedMeetups();
-        $id = count($meetups) + 1;
-        $meetup->setId($id);
         $meetups[] = $meetup;
         file_put_contents($this->filePath, Serializer::serialize($meetups));
     }
 
-    public function byId(int $id): Meetup
+    public function byId(MeetupId $meetupId): Meetup
     {
         foreach ($this->persistedMeetups() as $meetup) {
-            if ($meetup->id() === $id) {
+            if ($meetup->id() === (string)$meetupId) {
                 return $meetup;
             }
         }
@@ -78,5 +81,10 @@ final class FileBasedMeetupRepository implements MeetupRepository
     public function deleteAll(): void
     {
         file_put_contents($this->filePath, '[]');
+    }
+
+    public function nextIdentity(): MeetupId
+    {
+        return MeetupId::fromString((string)Uuid::uuid4());
     }
 }

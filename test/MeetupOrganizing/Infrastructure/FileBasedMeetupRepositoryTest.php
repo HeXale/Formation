@@ -3,10 +3,14 @@ declare(strict_types = 1);
 
 namespace Tests\MeetupOrganizing\Infrastructure;
 
+<<<<<<< HEAD:test/MeetupOrganizing/Infrastructure/MeetupRepositoryTest.php
+=======
+use MeetupOrganizing\Domain\Model\MeetupId;
+>>>>>>> 937cee3c946cdb6624d55b0da7d0f8776c6df241:test/MeetupOrganizing/Infrastructure/FileBasedMeetupRepositoryTest.php
 use MeetupOrganizing\Infrastructure\Persistence\FileSystem\FileBasedMeetupRepository;
 use Tests\MeetupOrganizing\Domain\Model\Util\MeetupFactory;
 
-final class MeetupRepositoryTest extends \PHPUnit_Framework_TestCase
+final class FileBasedMeetupRepositoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var FileBasedMeetupRepository
@@ -29,10 +33,7 @@ final class MeetupRepositoryTest extends \PHPUnit_Framework_TestCase
         $originalMeetup = MeetupFactory::someMeetup();
         $this->repository->add($originalMeetup);
 
-        $this->assertInternalType('int', $originalMeetup->id());
-        $this->assertGreaterThanOrEqual(1, $originalMeetup->id());
-
-        $restoredMeetup = $this->repository->byId($originalMeetup->id());
+        $restoredMeetup = $this->repository->byId(MeetupId::fromString($originalMeetup->id()));
 
         $this->assertEquals($originalMeetup, $restoredMeetup);
     }
