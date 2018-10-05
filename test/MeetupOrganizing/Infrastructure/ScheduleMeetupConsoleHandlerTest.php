@@ -1,9 +1,14 @@
 <?php
 declare(strict_types=1);
 
+<<<<<<< HEAD:test/MeetupOrganizing/Infrastructure/ScheduleMeetupConsoleHandlerTest.php
 namespace Tests\MeetupOrganizing\Infrastructure;
 
 use MeetupOrganizing\Infrastructure\UserInterface\Cli\MeetupApplicationConfig;
+=======
+namespace MeetupOrganizing\Command;
+
+>>>>>>> formation/master:test/MeetupOrganizing/Command/ScheduleMeetupConsoleHandlerTest.php
 use Webmozart\Console\Args\StringArgs;
 use Webmozart\Console\ConsoleApplication;
 use Webmozart\Console\IO\OutputStream\BufferedOutputStream;

@@ -22,7 +22,7 @@ final class FileBasedMeetupRepository implements MeetupRepository
     public function add(Meetup $meetup): void
     {
         $meetups = $this->persistedMeetups();
-        $id = count($meetups) + 1;
+        $id = \count($meetups) + 1;
         $meetup->setId($id);
         $meetups[] = $meetup;
         file_put_contents($this->filePath, Serializer::serialize($meetups));

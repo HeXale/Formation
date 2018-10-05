@@ -1,7 +1,11 @@
 <?php
 declare(strict_types = 1);
 
+<<<<<<< HEAD:test/MeetupOrganizing/Domain/Model/Util/MeetupFactory.php
 namespace Tests\MeetupOrganizing\Domain\Model\Util;
+=======
+namespace MeetupOrganizing\Entity\Util;
+>>>>>>> formation/master:test/MeetupOrganizing/Entity/Util/MeetupFactory.php
 
 use MeetupOrganizing\Domain\Model\Description;
 use MeetupOrganizing\Domain\Model\Meetup;
