@@ -2,7 +2,11 @@
 declare(strict_types = 1);
 
 <<<<<<< HEAD:test/MeetupOrganizing/Domain/Model/DescriptionTest.php
+<<<<<<< HEAD:test/MeetupOrganizing/Domain/Model/DescriptionTest.php
 namespace Tests\MeetupOrganizing\Domain\Model;
+=======
+namespace Tests\Unit\MeetupOrganizing\Domain\Model;
+>>>>>>> twimm:test/Unit/MeetupOrganizing/Domain/Model/DescriptionTest.php
 
 use MeetupOrganizing\Domain\Model\Description;
 =======

@@ -25,6 +25,9 @@ interface MeetupRepository
      */
     public function pastMeetups(\DateTimeImmutable $now): array;
 
+    /**
+     * @return Meetup[]
+     */
     public function allMeetups(): array;
 
     public function deleteAll(): void;

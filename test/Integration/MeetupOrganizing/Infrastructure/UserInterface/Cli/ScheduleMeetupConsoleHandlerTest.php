@@ -2,7 +2,11 @@
 declare(strict_types=1);
 
 <<<<<<< HEAD:test/MeetupOrganizing/Infrastructure/ScheduleMeetupConsoleHandlerTest.php
+<<<<<<< HEAD:test/MeetupOrganizing/Infrastructure/ScheduleMeetupConsoleHandlerTest.php
 namespace Tests\MeetupOrganizing\Infrastructure;
+=======
+namespace Tests\Integration\MeetupOrganizing\Infrastructure\UserInterface\Cli;
+>>>>>>> twimm:test/Integration/MeetupOrganizing/Infrastructure/UserInterface/Cli/ScheduleMeetupConsoleHandlerTest.php
 
 use MeetupOrganizing\Infrastructure\UserInterface\Cli\MeetupApplicationConfig;
 =======
@@ -20,9 +24,9 @@ final class ScheduleMeetupConsoleHandlerTest extends \PHPUnit_Framework_TestCase
      */
     public function it_schedules_a_meetup(): void
     {
-        $container = require __DIR__ . '/../../../app/container.php';
+        $container = require __DIR__ . '/../../../../../../app/container.php';
 
-        $config = new \MeetupOrganizing\Infrastructure\UserInterface\Cli\MeetupApplicationConfig($container);
+        $config = new MeetupApplicationConfig($container);
         $config->setTerminateAfterRun(false);
         $cli = new ConsoleApplication($config);
 
